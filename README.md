@@ -99,7 +99,7 @@ gwas-bounds/
 
 - Python ≥ 3.10
 - Python packages listed in `requirements.txt` (`numpy`, `pandas`, `matplotlib`, `scipy`, `msprime`)
-- PLINK v1.9 or v2 (for genotype-format conversion in the simulation pipeline)
+- PLINK v1.9 (for genotype-format conversion in the simulation pipeline)
 - SLEMM (for REML + score-chi-square in phenotype simulations);
   available at <https://github.com/jiang18/slemm>
 
