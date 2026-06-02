@@ -1,0 +1,18 @@
+# Core scientific stack used throughout the pipeline
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+
+# Plotting (figure scripts)
+matplotlib>=3.7
+
+# Coalescent simulation
+msprime==1.3.4
+
+# Notes:
+# - External tools used by the pipeline that are NOT installed via pip:
+#     * PLINK v1.9 or v2 (genotype format conversion in msprime/npy_to_plink.py
+#       and the GRAMMAR-Gamma analysis pipeline)
+#     * SLEMM (REML and score-chi-square in phenotype simulations);
+#       https://github.com/jiang18/slemm
+# - Tested with Python 3.10-3.12.
