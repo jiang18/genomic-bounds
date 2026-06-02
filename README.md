@@ -91,14 +91,9 @@ gwas-bounds/
 
 ## What is archived vs. what is regenerable
 
-| Archived in this repo                                                   | Not archived (regenerable)                          |
-|-------------------------------------------------------------------------|-----------------------------------------------------|
-| LD-matrix eigenvalue arrays (`msprime/eigen_out/`)                      | Raw simulated genotype matrices (multi-GB; can be regenerated from documented msprime random seeds) |
-| Per-replicate score $\chi^2$ statistics (`msprime/plink_out/.../per_replicate_chi2.csv`) | Raw chip-genotype data for the three real-data panels (download from the Figshare DOIs listed in `grammar-gamma-coeffs/datasets/livestock_public/README.md`) |
-| Per-population focal-SNP information (`msprime/plink_out/.../focal_snps_info.csv`) | QC intermediates produced by the GRAMMAR-Gamma analysis pipeline |
-| Average GRAMMAR-Gamma tables for full-GRM and LOCO (`msprime/cbar_Ne*.csv`) | |
-| Per-SNP GRAMMAR-Gamma coefficient tables for the three livestock chip panels (`grammar-gamma-coeffs/analysis_outputs/grammar_gamma/results/`) | |
-| Published manuscript figures (PDF) and tables (CSV) | |
+| Archived in this repo | Not archived (regenerable) |
+|---|---|
+| • LD-matrix eigenvalue arrays (`msprime/eigen_out/`)<br>• Per-replicate score $\chi^2$ statistics (`msprime/plink_out/.../per_replicate_chi2.csv`)<br>• Per-population focal-SNP information (`msprime/plink_out/.../focal_snps_info.csv`)<br>• Average GRAMMAR-Gamma tables for full-GRM and LOCO (`msprime/cbar_Ne*.csv`)<br>• Per-SNP GRAMMAR-Gamma coefficient tables for the three livestock chip panels (`grammar-gamma-coeffs/analysis_outputs/grammar_gamma/results/`)<br>• Published manuscript figures (PDF) and tables (CSV) | • Raw simulated genotype matrices (multi-GB; can be regenerated from documented msprime random seeds)<br>• Raw chip-genotype data for the three real-data panels (download from the Figshare DOIs listed in `grammar-gamma-coeffs/datasets/livestock_public/README.md`)<br>• QC intermediates produced by the GRAMMAR-Gamma analysis pipeline |
 
 ## Dependencies
 
