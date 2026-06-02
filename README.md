@@ -13,7 +13,7 @@ livestock are governed by the effective genomic dimensionality $M_e = 4 N_e L$
 in Morgans, so $M_e$ is low when $N_e$ is small, as in livestock). The
 framework gives these limits in closed form, including a per-SNP
 detection floor on the proportion of phenotypic variance explained,
-$q_{\min} \approx 30\,h^2/M_e$, and connects them to a well-established theoretical formula for genomic prediction accuracy, explaining why
+$q_{\min} \approx 30 \cdot h^2/M_e$, and connects them to a well-established theoretical formula for genomic prediction accuracy, explaining why
 prediction is comparatively easy in the very populations where SNP-level
 mapping is hard. It is validated through coalescent simulations
 (msprime) and per-SNP GRAMMAR-Gamma coefficients from three publicly
@@ -36,11 +36,11 @@ gwas-bounds/
 │   ├── run_all_scenarios.sh        Run all (h2, beta2, N) phenotype-sim scenarios
 │   ├── run_reml.sh                 REML + score-chi-square per replicate (uses SLEMM)
 │   ├── sim_step1.sh                Helper for stage 1 of the simulation pipeline
-│   ├── compute_cbar_loco.py        Average GRAMMAR-Gamma coefficients (full-GRM, LOCO)
+│   ├── compute_cbar_loco.py        Average GRAMMAR-Gamma coefficients (full-GRM and LOCO)
 │   ├── collect_results.py          Aggregate per-replicate outputs into summary tables
 │   │
 │   ├── cbar_Ne20.csv, cbar_Ne50.csv, cbar_Ne100.csv
-│   │                               Average GRAMMAR-Gamma tables (full-GRM, LOCO) per Ne
+│   │                               Average GRAMMAR-Gamma tables (full-GRM and LOCO) per Ne
 │   ├── eigen_out/                  Archived LD-matrix eigenvalue arrays per (Ne, N)
 │   │   └── Ne{20,50,100}/eigenvalues_N{N}.npy
 │   └── plink_out/                  Archived phenotype-simulation outputs per scenario
@@ -65,14 +65,14 @@ gwas-bounds/
 │   └── datasets/livestock_public/
 │       └── README.md               Pointers to public sources (Figshare DOIs);
 │                                   the raw genotype files themselves are NOT
-│                                   archived here -- see this README for download
+│                                   archived here. See this README for download
 │                                   links to the Chinese Holstein, German Holstein,
 │                                   and Karacabey Merino chip panels.
 │
 └── figures-tables/                 Scripts producing all published figures and tables
     ├── README.md                   Detailed file-by-file documentation
-    ├── style.py                    Shared rcParams, palettes, helper functions
-    ├── compute_table1_eigenspectrum.py    Table 1 + Tables S6, S7
+    ├── style.py                    Shared rcParams, palettes, and helper functions
+    ├── compute_table1_eigenspectrum.py    Table 1 + Tables S6 and S7
     ├── compute_table2_thresholds.py       Table 2
     ├── compute_tableS1_cl_summary.py      Table S1
     ├── compute_tableS2_per_snp_ncp.py     Table S2
@@ -94,7 +94,7 @@ gwas-bounds/
 | Archived in this repo                                                   | Not archived (regenerable)                          |
 |-------------------------------------------------------------------------|-----------------------------------------------------|
 | LD-matrix eigenvalue arrays (`msprime/eigen_out/`)                      | Raw simulated genotype matrices (multi-GB; can be regenerated from documented msprime random seeds) |
-| Per-replicate score-$\chi^2$ statistics (`msprime/plink_out/.../per_replicate_chi2.csv`) | Raw chip-genotype data for the three real-data panels (download from the Figshare DOIs listed in `grammar-gamma-coeffs/datasets/livestock_public/README.md`) |
+| Per-replicate score $\chi^2$ statistics (`msprime/plink_out/.../per_replicate_chi2.csv`) | Raw chip-genotype data for the three real-data panels (download from the Figshare DOIs listed in `grammar-gamma-coeffs/datasets/livestock_public/README.md`) |
 | Per-population focal-SNP information (`msprime/plink_out/.../focal_snps_info.csv`) | QC intermediates produced by the GRAMMAR-Gamma analysis pipeline |
 | Average GRAMMAR-Gamma tables for full-GRM and LOCO (`msprime/cbar_Ne*.csv`) | |
 | Per-SNP GRAMMAR-Gamma coefficient tables for the three livestock chip panels (`grammar-gamma-coeffs/analysis_outputs/grammar_gamma/results/`) | |
