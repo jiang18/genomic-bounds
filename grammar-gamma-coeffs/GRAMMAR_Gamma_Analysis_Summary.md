@@ -228,21 +228,21 @@ Procedure:
 3. Standardize each SNP using observed allele frequency.
 4. Construct the exact GRM:
 
-   $$
-   G = \frac{ZZ^T}{M}.
-   $$
+$$
+G = \frac{ZZ^T}{M}.
+$$
 
 5. For each working-model heritability value `h2`, form:
 
-   $$
-   V = Gh^2 + I(1-h^2).
-   $$
+$$
+V = Gh^2 + I(1-h^2).
+$$
 
 6. Compute the per-SNP coefficient:
 
-   $$
-   c_l = \frac{x_l^T V^{-1} x_l}{N}.
-   $$
+$$
+c_l = \frac{x_l^T V^{-1} x_l}{N}.
+$$
 
 The script uses a Cholesky factorization of `V` and processes SNPs in chunks.
 
