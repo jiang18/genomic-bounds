@@ -2,7 +2,8 @@
 
 Code and archived data for the manuscript
 **"Genomic Dimensionality Bounds Mixed-Model Association Power and
-Fine-Mapping Resolution"** (Jiang, in submission).
+Fine-Mapping Resolution"** (Jiang 2026, bioRxiv,
+https://doi.org/10.64898/2026.06.02.729628).
 
 ## Overview
 
@@ -176,8 +177,9 @@ analysis details.
 
 ## Citing this repository
 
-If you use this code or the archived data in your work, please cite
-the accompanying paper (citation will be added on publication).
+If you use this code or the archived data in your work, please cite the accompanying paper:
+> Jiang J. 2026. Genomic Dimensionality Bounds Mixed-Model Association Power and Fine-Mapping Resolution. bioRxiv.
+> https://doi.org/10.64898/2026.06.02.729628
 
 ## License
 
