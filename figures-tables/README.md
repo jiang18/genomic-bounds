@@ -79,7 +79,7 @@ via relative paths:
 | Supp. Table S5: Group B properties (S_A, S_B, U_B, Jensen gap) | 4.3 | `compute_tableS5_group_b.py` | `tables/tableS5_group_b.csv` |
 | Supp. Table S6: EIG98 spectrum | 4.3 | `compute_table1_eigenspectrum.py` | `tables/tableS6_eig98.csv` |
 | Supp. Table S7: EIG99 spectrum | 4.3 | `compute_table1_eigenspectrum.py` | `tables/tableS7_eig99.csv` |
-| Supp. Table S8: GBLUP reliability | 4.4 | ≈ `../msprime/gblup_reliability.csv` | `tables/tableS8_gblup_reliability.csv` |
+| Supp. Table S8: GBLUP reliability | 4.4 | ~`../msprime/gblup_reliability.csv` | `tables/tableS8_gblup_reliability.csv` |
 
 ## Usage
 
