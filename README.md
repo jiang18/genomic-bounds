@@ -1,29 +1,24 @@
-# gwas-bounds
+# genomic-bounds
 
 Code and archived data for the manuscript
-**"Genomic Dimensionality Bounds Mixed-Model Association Power and
-Fine-Mapping Resolution"** (Jiang 2026, bioRxiv,
-https://doi.org/10.64898/2026.06.02.729628).
+**"Genomic Dimensionality Bounds Mixed-Model Association Power, Fine-Mapping Resolution, and Genomic Prediction Reliability"** (Jiang 2026, bioRxiv, https://doi.org/10.64898/2026.06.02.729628).
 
 ## Overview
 
 This repository accompanies a theoretical study showing that
-mixed-model GWAS power saturation and fine-mapping resolution limits in
-livestock are governed by the effective genomic dimensionality $M_e = 4 N_e L$
+mixed-model GWAS power, fine-mapping resolution, and genomic prediction
+reliability are all governed by a unified quantity of sample size $N$,
+which we refer to as $S(N)$. $S(N)$ grows concavely with $N$ toward a
+practical ceiling of the effective genomic dimensionality $M_e = 4 N_e L$
 (where $N_e$ is the effective population size and $L$ the genome length
-in Morgans, so $M_e$ is low when $N_e$ is small, as in livestock). The
-framework gives these limits in closed form, including a per-SNP
-detection floor on the proportion of phenotypic variance explained,
-$q_{\min} \approx 30 \cdot h^2/M_e$, and connects them to a well-established theoretical formula for genomic prediction accuracy, explaining why
-prediction is comparatively easy in the very populations where SNP-level
-mapping is hard. It is validated through coalescent simulations
-(msprime) and per-SNP GRAMMAR-Gamma coefficients from three publicly
-available livestock chip-genotype datasets.
+in Morgans); as a result, $N_e$ bounds GWAS, fine-mapping, and
+prediction. The framework predicts these outcomes quantitatively, with
+explicit formulas.
 
 ## Repository layout
 
 ```
-gwas-bounds/
+genomic-bounds/
 ├── README.md                       (this file)
 ├── LICENSE                         MIT license
 ├── requirements.txt                Python dependencies
@@ -39,9 +34,12 @@ gwas-bounds/
 │   ├── sim_step1.sh                Helper for stage 1 of the simulation pipeline
 │   ├── compute_cbar_loco.py        Average GRAMMAR-Gamma coefficients (full-GRM and LOCO)
 │   ├── collect_results.py          Aggregate per-replicate outputs into summary tables
+│   ├── compute_gblup_reliability.py  In-sample GBLUP reliability validation (Equation 17; uses SLEMM)
 │   │
 │   ├── cbar_Ne20.csv, cbar_Ne50.csv, cbar_Ne100.csv
 │   │                               Average GRAMMAR-Gamma tables (full-GRM and LOCO) per Ne
+│   ├── gblup_reliability.csv        In-sample GBLUP reliability: empirical vs predicted (36 scenarios)
+│   ├── gblup_reliability_perrep.csv Per-replicate GBLUP reliability (100 reps x 36 scenarios)
 │   ├── eigen_out/                  Archived LD-matrix eigenvalue arrays per (Ne, N)
 │   │   └── Ne{20,50,100}/eigenvalues_N{N}.npy
 │   └── plink_out/                  Archived phenotype-simulation outputs per scenario
@@ -84,6 +82,7 @@ gwas-bounds/
     ├── fig2_ncp_scatter.py                Figure 2
     ├── fig3_sigmoid_sum.py                Figure 3
     ├── fig4_cbar_divergence.py            Figure 4
+    ├── fig5_gblup_reliability.py          Figure 5
     ├── fig_supp_sb_sa_ratio.py            Figure S1
     ├── fig_supp_group_b.py                Figure S2
     ├── tables/                            Published CSV tables (regenerable)
@@ -94,7 +93,7 @@ gwas-bounds/
 
 | Archived in this repo | Not archived (regenerable) |
 |---|---|
-| • LD-matrix eigenvalue arrays (`msprime/eigen_out/`)<br>• Per-replicate score $\chi^2$ statistics (`msprime/plink_out/.../per_replicate_chi2.csv`)<br>• Per-population focal-SNP information (`msprime/plink_out/.../focal_snps_info.csv`)<br>• Average GRAMMAR-Gamma tables for full-GRM and LOCO (`msprime/cbar_Ne*.csv`)<br>• Per-SNP GRAMMAR-Gamma coefficient tables for the three livestock chip panels (`grammar-gamma-coeffs/analysis_outputs/grammar_gamma/results/`)<br>• Published manuscript figures (PDF) and tables (CSV) | • Raw simulated genotype matrices (multi-GB; can be regenerated from documented msprime random seeds)<br>• Raw chip-genotype data for the three real-data panels (download from the Figshare DOIs listed in `grammar-gamma-coeffs/datasets/livestock_public/README.md`)<br>• QC intermediates produced by the GRAMMAR-Gamma analysis pipeline |
+| • LD-matrix eigenvalue arrays (`msprime/eigen_out/`)<br>• Per-replicate score $\chi^2$ statistics (`msprime/plink_out/.../per_replicate_chi2.csv`)<br>• Per-population focal-SNP information (`msprime/plink_out/.../focal_snps_info.csv`)<br>• Average GRAMMAR-Gamma tables for full-GRM and LOCO (`msprime/cbar_Ne*.csv`)<br>• Per-SNP GRAMMAR-Gamma coefficient tables for the three livestock chip panels (`grammar-gamma-coeffs/analysis_outputs/grammar_gamma/results/`)<br>• In-sample GBLUP reliability tables (`msprime/gblup_reliability.csv`, `msprime/gblup_reliability_perrep.csv`)<br>• Published manuscript figures (PDF) and tables (CSV) | • Raw simulated genotype matrices (multi-GB; can be regenerated from documented msprime random seeds)<br>• Raw chip-genotype data for the three real-data panels (download from the Figshare DOIs listed in `grammar-gamma-coeffs/datasets/livestock_public/README.md`)<br>• QC intermediates produced by the GRAMMAR-Gamma analysis pipeline |
 
 ## Dependencies
 
@@ -131,6 +130,7 @@ python fig1_cl_distribution.py        --out figures/fig1_cl_distribution.pdf
 python fig2_ncp_scatter.py            --plink_dir ../msprime/plink_out --out figures/fig2_ncp_scatter.pdf
 python fig3_sigmoid_sum.py            --eigen_dir ../msprime/eigen_out --out figures/fig3_sigmoid_sum.pdf
 python fig4_cbar_divergence.py                                          --out figures/fig4_cbar_divergence.pdf
+python fig5_gblup_reliability.py     --csv ../msprime/gblup_reliability.csv --out figures/fig5_gblup_reliability.pdf
 python fig_supp_sb_sa_ratio.py        --eigen_dir ../msprime/eigen_out --out figures/fig_supp_sb_sa_ratio.pdf
 python fig_supp_group_b.py            --eigen_dir ../msprime/eigen_out --out figures/fig_supp_group_b.pdf
 ```
@@ -153,6 +153,7 @@ bash select_focal_snps.sh plink_out/Ne50
 python project_focal_snps.py sim_out/Ne50 eigen_out/Ne50 plink_out/Ne50 \
        5000 10000 20000 50000
 bash run_all_scenarios.sh Ne50 100 28        # 100 replicates, 28 threads
+python compute_gblup_reliability.py --nrep 100 --jobs 28   # in-sample GBLUP reliability -> gblup_reliability.csv
 ```
 
 The intermediate `sim_out/` directory holds the raw simulated
@@ -178,7 +179,7 @@ analysis details.
 ## Citing this repository
 
 If you use this code or the archived data in your work, please cite the accompanying paper:
-> Jiang J. 2026. Genomic Dimensionality Bounds Mixed-Model Association Power and Fine-Mapping Resolution. bioRxiv.
+> Jiang J. 2026. Genomic Dimensionality Bounds Mixed-Model Association Power, Fine-Mapping Resolution, and Genomic Prediction Reliability. bioRxiv.
 > https://doi.org/10.64898/2026.06.02.729628
 
 ## License

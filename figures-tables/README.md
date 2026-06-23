@@ -16,6 +16,7 @@
 | `fig2_ncp_scatter.py` | Figure 2: theoretical vs empirical NCP scatter (360 points) |
 | `fig3_sigmoid_sum.py` | Figure 3: S(N) saturation at Me (3 panels per Ne) |
 | `fig4_cbar_divergence.py` | Figure 4: full-GRM vs LOCO c-bar divergence (3 panels per Ne) |
+| `fig5_gblup_reliability.py` | Figure 5: empirical vs predicted in-sample GBLUP reliability (36 scenarios) |
 | `fig_supp_sb_sa_ratio.py` | Supplementary Figure S1: S_B/S_A ratio (3 panels per Ne) |
 | `fig_supp_group_b.py` | Supplementary Figure S2: S_B vs U_B (3 panels per Ne) |
 
@@ -66,8 +67,9 @@ via relative paths:
 | Figure 2: theoretical vs empirical NCP | 4.2 | `fig2_ncp_scatter.py` | `figures/fig2_ncp_scatter.pdf` |
 | Figure 3: S(N) saturation | 4.3 | `fig3_sigmoid_sum.py` | `figures/fig3_sigmoid_sum.pdf` |
 | Figure 4: c-bar divergence | 4.3 | `fig4_cbar_divergence.py` | `figures/fig4_cbar_divergence.pdf` |
+| Figure 5: GBLUP reliability | 4.4 | `fig5_gblup_reliability.py` | `figures/fig5_gblup_reliability.pdf` |
 | Table 1: eigenspectrum parameters | 4.3 | `compute_table1_eigenspectrum.py` | `tables/table1_eigenspectrum.csv` |
-| Table 2: detection and fine-mapping | 4.4 | `compute_table2_thresholds.py` | `tables/table2_thresholds.csv` |
+| Table 2: detection and fine-mapping | 4.5 | `compute_table2_thresholds.py` | `tables/table2_thresholds.csv` |
 | Supp. Figure S1: S_B/S_A ratio | 4.3 | `fig_supp_sb_sa_ratio.py` | `figures/fig_supp_sb_sa_ratio.pdf` |
 | Supp. Figure S2: S_B vs U_B | 4.3 | `fig_supp_group_b.py` | `figures/fig_supp_group_b.pdf` |
 | Supp. Table S1: c_l summary | 4.1 | `compute_tableS1_cl_summary.py` | `tables/tableS1_cl_summary.csv` |
@@ -77,6 +79,7 @@ via relative paths:
 | Supp. Table S5: Group B properties (S_A, S_B, U_B, Jensen gap) | 4.3 | `compute_tableS5_group_b.py` | `tables/tableS5_group_b.csv` |
 | Supp. Table S6: EIG98 spectrum | 4.3 | `compute_table1_eigenspectrum.py` | `tables/tableS6_eig98.csv` |
 | Supp. Table S7: EIG99 spectrum | 4.3 | `compute_table1_eigenspectrum.py` | `tables/tableS7_eig99.csv` |
+| Supp. Table S8: GBLUP reliability | 4.4 | from `../msprime/gblup_reliability.csv` | `tables/tableS8_gblup_reliability.csv` |
 
 ## Usage
 
@@ -109,6 +112,7 @@ python fig1_cl_distribution.py --out figures/fig1_cl_distribution.pdf
 python fig2_ncp_scatter.py --plink_dir ../msprime/plink_out --out figures/fig2_ncp_scatter.pdf
 python fig3_sigmoid_sum.py --eigen_dir ../msprime/eigen_out --out figures/fig3_sigmoid_sum.pdf
 python fig4_cbar_divergence.py --out figures/fig4_cbar_divergence.pdf
+python fig5_gblup_reliability.py --csv ../msprime/gblup_reliability.csv --out figures/fig5_gblup_reliability.pdf
 
 # Supplementary figures
 python fig_supp_sb_sa_ratio.py --eigen_dir ../msprime/eigen_out --out figures/fig_supp_sb_sa_ratio.pdf
@@ -121,7 +125,7 @@ python fig_supp_group_b.py --eigen_dir ../msprime/eigen_out --out figures/fig_su
 NCP analysis (`empirical_ncp.csv`, `ncp_validation_summary.csv`).  These
 are kept for reproducibility but are not publication tables.
 
-## Species parameters (from Supplementary Methods S14)
+## Species parameters (from Supplementary Methods S15)
 
 | Species | Ne | L (Morgans) | Me = 4NeL |
 |---|---|---|---|
